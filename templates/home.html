@@ -1,0 +1,780 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechBlog</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+body{
+background:#0b1120;
+color:white;
+overflow-x:hidden;
+}
+.navbar{
+background:#111827;
+padding:16px 40px;
+box-shadow:0 5px 20px rgba(0,0,0,.4);
+}
+.btn-login-nav{
+background:#2563eb;
+color:white;
+padding:8px 18px;
+border-radius:8px;
+font-weight:600;
+}
+.btn-login-nav:hover{
+background:#1d4ed8;
+color:white;
+}
+.btn-register-nav{
+border:2px solid #60a5fa;
+color:#60a5fa;
+padding:8px 18px;
+border-radius:8px;
+font-weight:600;
+}
+.btn-register-nav:hover{
+background:#60a5fa;
+color:white;
+}
+.btn-admin-nav{
+background:#7c3aed;
+color:white;
+padding:8px 18px;
+border-radius:8px;
+font-weight:600;
+}
+.btn-admin-nav:hover{
+background:#6d28d9;
+color:white;
+}
+.navbar-brand{
+font-size:30px;
+font-weight:700;
+color:#60a5fa !important;
+}
+.nav-link{
+color:#d1d5db !important;
+margin-left:18px;
+font-weight:500;
+transition:.3s;
+}
+.nav-link:hover{
+color:#60a5fa !important;
+}
+.hero{
+padding:90px 0;
+}
+.hero h1{
+font-size:58px;
+font-weight:700;
+line-height:75px;
+}
+.hero span{
+color:#60a5fa;
+}
+.hero p{
+margin-top:25px;
+font-size:18px;
+color:#cbd5e1;
+line-height:32px;
+
+max-width:520px;
+}
+.btn-login{
+background:#2563eb;
+color:white;
+padding:12px 30px;
+border-radius:10px;
+font-weight:600;
+margin-right:15px;
+}
+.btn-login:hover{
+background:#1d4ed8;
+color:white;
+}
+.btn-register{
+border:2px solid #60a5fa;
+color:#60a5fa;
+padding:12px 30px;
+border-radius:10px;
+font-weight:600;
+}
+.btn-register:hover{
+background:#60a5fa;
+color:white;
+}
+.hero-card{
+background:#111827;
+border-radius:25px;
+padding:40px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+.hero-card i{
+font-size:120px;
+color:#60a5fa;
+}
+.hero-card h3{
+margin-top:20px;
+font-weight:600;
+}
+.hero-card p{
+color:#94a3b8;
+font-size:16px;
+}
+.section-title{
+font-size:38px;
+font-weight:bold;
+color:#60a5fa;
+margin-bottom:15px;
+}
+.about{
+padding:80px 0;
+
+}
+.about p{
+color:#cbd5e1;
+font-size:18px;
+line-height:32px;
+}
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg">
+<div class="container">
+<a class="navbar-brand" href="/">
+<i class="fa-solid fa-laptop-code me-2"></i>
+TechBlog
+</a>
+<button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-end" id="menu">
+<ul class="navbar-nav align-items-center">
+<li class="nav-item">
+<a class="nav-link" href="/">
+<i class="fa-solid fa-house me-1"></i>
+Home
+</a>
+</li>
+<li class="nav-item ms-2">
+<a class="btn btn-login-nav"
+href="{% url 'login' %}">
+<i class="fa-solid fa-right-to-bracket me-1"></i>
+Login
+
+</a>
+</li>
+<li class="nav-item ms-2">
+<a class="btn btn-register-nav"
+href="{% url 'register' %}">
+<i class="fa-solid fa-user-plus me-1"></i>
+Register
+
+</a>
+</li>
+<li class="nav-item ms-2">
+<a class="btn btn-danger"
+href="{% url 'admin_login' %}">
+
+<i class="fa-solid fa-user-shield"></i>
+
+Admin Login
+
+</a>
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</nav>
+
+<div class="container">
+
+<!-- HERO -->
+
+<div class="row hero align-items-center">
+
+<div class="col-lg-6">
+
+<h1>
+
+Professional
+
+<span>
+
+Blogging
+
+</span>
+
+Platform
+
+</h1>
+
+<p>
+
+TechBlog is a blogging platform built using Python, Django and Bootstrap.
+
+Create, manage and publish technical blogs through a clean and modern interface.
+
+</p>
+
+<div class="mt-4">
+
+<a href="{% url 'login' %}"
+
+class="btn btn-login">
+
+Login
+
+</a>
+
+<a href="{% url 'register' %}"
+
+class="btn btn-register">
+
+Register
+
+</a>
+
+</div>
+
+</div>
+
+<div class="col-lg-6">
+
+<div class="hero-card">
+
+<i class="fa-solid fa-laptop-code"></i>
+
+<h3>
+
+TechBlog
+
+</h3>
+
+<p>
+
+Simple  • Professional
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ABOUT -->
+
+<section class="about">
+
+<div class="row align-items-center">
+
+<div class="col-lg-7">
+
+<h2 class="section-title">
+
+About TechBlog
+
+</h2>
+
+<p>
+
+TechBlog is a modern blogging platform where users can create, edit, search and manage technical blogs.
+
+The application is developed using Python, Django, Bootstrap and SQLite with a clean and responsive interface.
+
+</p>
+
+</div>
+
+<div class="col-lg-5 text-center">
+
+<i class="fa-solid fa-code"
+
+style="font-size:160px;color:#2563eb;"></i>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="pb-5">
+
+<h2 class="section-title text-center">
+
+Key Features
+
+</h2>
+
+<p class="text-center text-secondary mb-5">
+
+Everything you need to create and manage technical blogs.
+
+</p>
+
+<div class="row g-4">
+
+<div class="col-md-6">
+
+<div class="feature-box">
+
+<div class="icon-box bg-primary">
+
+<i class="fa-solid fa-pen"></i>
+
+</div>
+
+<div>
+
+<h4>Create Blogs</h4>
+
+<p>
+
+Create technical blogs with an easy-to-use editor and share your knowledge professionally.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-6">
+
+<div class="feature-box">
+
+<div class="icon-box bg-success">
+
+<i class="fa-solid fa-book"></i>
+
+</div>
+
+<div>
+
+<h4>Manage Blogs</h4>
+
+<p>
+
+Edit, update and delete your blogs whenever required.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-6">
+
+<div class="feature-box">
+
+<div class="icon-box bg-warning">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+</div>
+
+<div>
+
+<h4>Search Blogs</h4>
+
+<p>
+
+Find blogs instantly using titles and keywords.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-6">
+
+<div class="feature-box">
+
+<div class="icon-box bg-danger">
+
+<i class="fa-solid fa-lock"></i>
+
+</div>
+
+<div>
+
+<h4>Secure Login</h4>
+
+<p>
+
+Django authentication keeps user accounts secure.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="pb-5">
+
+<h2 class="section-title text-center">
+
+Technologies Used
+
+</h2>
+
+<div class="row g-3 mt-3">
+
+<div class="col-md-2 col-6">
+<div class="tech-card">Python</div>
+</div>
+
+<div class="col-md-2 col-6">
+<div class="tech-card">Django</div>
+</div>
+
+<div class="col-md-2 col-6">
+<div class="tech-card">Bootstrap</div>
+</div>
+
+<div class="col-md-2 col-6">
+<div class="tech-card">SQLite</div>
+</div>
+
+<div class="col-md-2 col-6">
+<div class="tech-card">MongoDB</div>
+</div>
+
+<div class="col-md-2 col-6">
+<div class="tech-card">REST API</div>
+</div>
+
+</div>
+
+</section>
+
+<style>
+
+.feature-box{
+
+background:#111827;
+
+border:1px solid #1f2937;
+
+border-radius:18px;
+
+padding:30px;
+
+display:flex;
+
+align-items:center;
+
+gap:25px;
+
+transition:.3s;
+
+height:100%;
+
+}
+
+.feature-box:hover{
+
+transform:translateY(-6px);
+
+border-color:#3b82f6;
+
+box-shadow:0 12px 30px rgba(59,130,246,.18);
+
+}
+
+.icon-box{
+
+width:70px;
+
+height:70px;
+
+border-radius:16px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:28px;
+
+color:white;
+
+flex-shrink:0;
+
+}
+
+.feature-box h4{
+
+font-size:22px;
+
+font-weight:600;
+
+margin-bottom:10px;
+
+}
+
+.feature-box p{
+
+color:#94a3b8;
+
+margin:0;
+
+line-height:28px;
+
+}
+
+.tech-card{
+
+background:#111827;
+
+padding:18px;
+
+border-radius:12px;
+
+text-align:center;
+
+font-weight:600;
+
+border:1px solid #1f2937;
+
+transition:.3s;
+
+}
+
+.tech-card:hover{
+
+background:#2563eb;
+
+border-color:#2563eb;
+
+}
+
+</style>
+
+
+<style>
+
+.stat-card{
+
+background:#111827;
+
+border:1px solid #1f2937;
+
+border-radius:18px;
+
+padding:35px;
+
+text-align:center;
+
+transition:.3s;
+
+height:100%;
+
+}
+
+.stat-card:hover{
+
+transform:translateY(-6px);
+
+border-color:#3b82f6;
+
+box-shadow:0 10px 25px rgba(59,130,246,.2);
+
+}
+
+.stat-card i{
+
+font-size:45px;
+
+color:#60a5fa;
+
+margin-bottom:18px;
+
+}
+
+.stat-card h2{
+
+font-size:38px;
+
+font-weight:700;
+
+margin-bottom:10px;
+
+}
+
+.stat-card p{
+
+color:#94a3b8;
+
+margin:0;
+
+}
+
+footer{
+
+margin-top:60px;
+
+padding:30px 0;
+
+border-top:1px solid #1f2937;
+
+}
+
+.footer-title{
+
+font-size:26px;
+
+font-weight:700;
+
+color:#60a5fa;
+
+}
+
+.footer-text{
+
+color:#94a3b8;
+
+font-size:15px;
+
+}
+
+.footer-link{
+
+color:#cbd5e1;
+
+text-decoration:none;
+
+display:block;
+
+margin-bottom:10px;
+
+transition:.3s;
+
+}
+
+.footer-link:hover{
+
+color:#60a5fa;
+
+}
+
+</style>
+
+<footer>
+
+<div class="row">
+
+<div class="col-md-4">
+
+<h3 class="footer-title">
+
+<i class="fa-solid fa-laptop-code"></i>
+
+TechBlog
+
+</h3>
+
+<p class="footer-text">
+
+Professional Blogging Platform developed using Python, Django and Bootstrap.
+
+</p>
+
+</div>
+
+<div class="col-md-4">
+
+<h5 class="mb-3">
+
+Quick Links
+
+</h5>
+
+<a href="/" class="footer-link">Home</a>
+
+<a href="{% url 'login' %}" class="footer-link">Login</a>
+
+<a href="{% url 'register' %}" class="footer-link">Register</a>
+
+</div>
+
+<div class="col-md-4">
+
+<h5 class="mb-3">
+
+Technology Stack
+
+</h5>
+
+<p class="footer-text">
+
+Python • Django
+
+</p>
+
+<p class="footer-text">
+
+Bootstrap • SQLite
+
+</p>
+
+<p class="footer-text">
+
+MongoDB • REST API
+
+</p>
+
+</div>
+
+</div>
+
+<hr class="text-secondary mt-4">
+
+<div class="text-center">
+
+<p class="footer-text mb-0">
+
+© 2026 TechBlog | Final Year Project
+
+</p>
+
+</div>
+
+</footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

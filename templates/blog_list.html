@@ -1,0 +1,359 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+body{
+    background:#0f172a;
+}
+.blog-container{
+    max-width:1200px;
+    margin:auto;
+    padding:40px 20px;
+}
+.hero{
+    background:#111827;
+    padding:50px;
+    border-radius:20px;
+    color:white;
+    text-align:center;
+    margin-bottom:35px;
+    border:1px solid #1e293b;
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+.hero h1{
+    color:#fff;
+    font-size:42px;
+    font-weight:700;
+}
+.hero p{
+    color:#94a3b8;
+    margin:15px 0 30px;
+    font-size:18px;
+}
+.create-btn{
+    background:#2563eb;
+    color:white;
+    padding:12px 28px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:600;
+}
+.create-btn:hover{
+    background:#1d4ed8;
+    color:white;
+}
+.search-card{
+    background:#111827;
+    padding:25px;
+    border-radius:18px;
+    margin-bottom:30px;
+    border:1px solid #1e293b;
+}
+.search-card .form-control{
+    background:#1e293b;
+    border:none;
+    color:white;
+    height:55px;
+}
+.search-card .form-control::placeholder{
+    color:#94a3b8;
+}
+.search-card .form-control:focus{
+    background:#1e293b;
+    color:white;
+    box-shadow:none;
+    border:1px solid #2563eb;
+}
+.search-btn{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:0 30px;
+    font-weight:600;
+}
+.search-btn:hover{
+    background:#1d4ed8;
+}
+.blog-card{
+    background:#111827;
+    border-radius:18px;
+    padding:30px;
+    margin-bottom:25px;
+    border:1px solid #1e293b;
+    box-shadow:0 10px 25px rgba(0,0,0,.35);
+    transition:.3s;
+}
+.blog-card:hover{
+    transform:translateY(-5px);
+    border-color:#2563eb;
+}
+.blog-title{
+    color:white;
+    font-size:28px;
+    font-weight:700;
+}
+.blog-content{
+    color:#cbd5e1;
+    line-height:30px;
+}
+.text-secondary,
+.text-muted{
+    color:#94a3b8 !important;
+}
+hr{
+    border-color:#334155;
+}
+.badge-tag{
+    background:#1d4ed8;
+    color:white;
+    padding:8px 15px;
+    border-radius:20px;
+}
+.btn-view,
+.btn-edit,
+.btn-delete{
+    padding:10px 18px;
+    border-radius:10px;
+    text-decoration:none;
+    color:white;
+    font-weight:600;
+}
+.btn-view{
+    background:#2563eb;
+}
+.btn-edit{
+    background:#f59e0b;
+}
+.btn-delete{
+    background:#dc2626;
+}
+.btn-view:hover,
+.btn-edit:hover,
+.btn-delete:hover{
+    color:white;
+    opacity:.9;
+}
+.card{
+    background:#111827;
+    color:white;
+}
+.card p{
+    color:#94a3b8 !important;
+}
+.pagination{
+    gap:8px;
+}
+.page-link{
+    background:#111827;
+    color:white;
+    border:1px solid #1e293b;
+    border-radius:10px;
+}
+.page-link:hover{
+    background:#2563eb;
+    color:white;
+}
+.page-item.active .page-link{
+    background:#2563eb;
+    border-color:#2563eb;
+}
+</style>
+<div class="blog-container">
+<div class="hero">
+<h1>
+<i class="fa-solid fa-book-open"></i>
+TechBlog Articles
+</h1>
+<p>
+Read, Manage and Share Professional Technology Blogs
+</p>
+<a href="{% url 'create_blog' %}" class="create-btn">
+<i class="fa-solid fa-plus"></i>
+Create New Blog
+</a>
+</div>
+<div class="search-card">
+<form method="GET">
+<div class="input-group">
+<input
+type="text"
+class="form-control"
+name="search"
+placeholder="Search Blog..."
+value="{{ request.GET.search }}">
+<button class="search-btn">
+<i class="fa fa-search"></i>
+Search
+</button>
+</div>
+</form>
+</div>
+{% for blog in blogs %}
+<div class="blog-card">
+<div class="d-flex justify-content-between align-items-center">
+<div>
+<h2 class="blog-title">
+{{ blog.title }}
+</h2>
+<p class="text-secondary mb-2">
+<i class="fa-solid fa-user text-primary"></i>
+<strong>{{ blog.author }}</strong>
+</p>
+</div>
+{% if blog.tags %}
+<span class="badge-tag">
+<i class="fa-solid fa-tags"></i>
+{{ blog.tags }}
+</span>
+{% endif %}
+</div>
+<hr>
+<p class="blog-content">
+{{ blog.content|truncatewords:45 }}
+</p>
+<div class="d-flex justify-content-between align-items-center mt-4">
+<div>
+<small class="text-muted">
+<i class="fa-solid fa-hashtag"></i>
+Blog ID :
+<strong>{{ blog.id }}</strong>
+</small>
+</div>
+<div class="d-flex gap-2">
+<a href="{% url 'view_blog' blog.id %}"
+class="btn-view">
+<i class="fa-solid fa-eye"></i>
+View
+</a>
+<a href="{% url 'edit_blog' blog.id %}"
+class="btn-edit">
+<i class="fa-solid fa-pen"></i>
+Edit
+</a>
+<a href="{% url 'delete_blog' blog.id %}"
+class="btn-delete">
+<i class="fa-solid fa-trash"></i>
+Delete
+</a>
+</div>
+</div>
+</div>
+{% empty %}
+<div class="card p-5 text-center shadow border-0 rounded-4">
+<i class="fa-solid fa-book-open fa-4x text-primary mb-3"></i>
+<h3>No Blogs Available</h3>
+<p class="text-muted">
+There are no blogs available yet.
+</p>
+<a href="{% url 'create_blog' %}"
+class="btn btn-primary mt-3">
+Create First Blog
+</a>
+</div>
+{% endfor %}
+{% if page_obj.has_other_pages %}
+<div class="d-flex justify-content-center mt-5">
+<nav>
+<ul class="pagination">
+{% if page_obj.has_previous %}
+<li class="page-item">
+<a class="page-link"
+href="?page={{ page_obj.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+<i class="fa-solid fa-angle-left"></i>
+</a>
+</li>
+{% endif %}
+{% for num in page_obj.paginator.page_range %}
+{% if page_obj.number == num %}
+<li class="page-item active">
+<span class="page-link">
+{{ num }}
+</span>
+</li>
+{% else %}
+<li class="page-item">
+<a class="page-link"
+href="?page={{ num }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+{{ num }}
+</a>
+</li>
+{% endif %}
+{% endfor %}
+{% if page_obj.has_next %}
+<li class="page-item">
+<a class="page-link"
+href="?page={{ page_obj.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</li>
+{% endif %}
+</ul>
+</nav>
+</div>
+{% endif %}
+</div>
+<style>
+.pagination{
+gap:8px;
+}
+.page-link{
+border:none;
+background:white;
+color:#2563eb;
+padding:12px 18px;
+border-radius:10px;
+font-weight:600;
+box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+.page-link:hover{
+background:#2563eb;
+color:white;
+}
+.page-item.active .page-link{
+background:#2563eb;
+color:white;
+}
+@media(max-width:768px){
+.hero{
+padding:35px 20px;
+}
+.hero h1{
+font-size:30px;
+}
+.blog-card{
+padding:20px;
+}
+.blog-title{
+font-size:24px;
+}
+.d-flex.justify-content-between{
+flex-direction:column;
+align-items:flex-start!important;
+gap:15px;
+}
+.search-btn{
+margin-top:10px;
+width:100%;
+height:50px;
+}
+.create-btn{
+display:block;
+width:100%;
+text-align:center;
+}
+.btn-view,
+.btn-edit,
+.btn-delete{
+display:block;
+width:100%;
+margin-bottom:10px;
+text-align:center;
+}
+}
+</style>
+{% endblock %}

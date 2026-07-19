@@ -1,0 +1,316 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechBlog Dashboard</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+body{
+background:#0f172a;
+color:white;
+overflow-x:hidden;
+}
+.navbar{
+background:#111827;
+box-shadow:0 4px 15px rgba(0,0,0,.4);
+padding:15px 30px;
+}
+.navbar-brand{
+font-size:28px;
+font-weight:bold;
+color:#60a5fa !important;
+}
+.nav-link{
+color:white !important;
+margin-left:20px;
+transition:.3s;
+}
+.nav-link:hover{
+color:#60a5fa !important;
+}
+.hero{
+margin:35px;
+padding:50px;
+border-radius:20px;background:linear-gradient(135deg,#2563eb,#7c3aed);
+box-shadow:0 15px 30px rgba(0,0,0,.3);
+}
+.hero h1{
+font-size:45px;
+font-weight:bold;
+}
+.hero p{
+margin-top:15px;
+font-size:18px;
+color:#e2e8f0;
+}
+.hero button{
+margin-top:20px;
+padding:12px 30px;
+border:none;
+border-radius:10px;
+font-weight:bold;
+transition:.3s;
+}
+.hero button:hover{
+transform:translateY(-5px);
+}
+.stat-card{
+background:#1e293b;
+border-radius:18px;
+padding:25px;
+text-align:center;
+transition:.4s;
+box-shadow:0 8px 20px rgba(0,0,0,.3);
+}
+.stat-card:hover{
+transform:translateY(-8px);
+background:#334155;
+}
+.stat-card i{
+font-size:45px;
+margin-bottom:15px;
+color:#60a5fa;
+}
+.stat-card h2{
+font-size:35px;
+font-weight:bold;
+}
+.stat-card p{
+color:#cbd5e1;
+font-size:18px;
+}
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg">
+<div class="container-fluid">
+<a class="navbar-brand">
+<i class="fa-solid fa-laptop-code"></i>
+TechBlog
+</a>
+<button class="navbar-toggler bg-light"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#menu">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-end"
+id="menu">
+<ul class="navbar-nav">
+<li class="nav-item">
+<a class="nav-link"
+href="{% url 'dashboard' %}">
+<i class="fa fa-house"></i>
+Dashboard</a>
+</li>
+<li class="nav-item">
+<a class="nav-link"
+href="{% url 'create_blog' %}">
+<i class="fa fa-plus"></i>Create Blog
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link"
+href="{% url 'blog_list' %}">
+<i class="fa fa-book-open"></i>
+Blogs
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link"
+href="{% url 'logout' %}">
+<i class="fa fa-right-from-bracket"></i>
+Logout
+</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<div class="container">
+<div class="hero text-center">
+<h1>
+Welcome Back,
+{{ request.user.username }} 👋
+</h1>
+<p>
+Write Amazing Blogs • Share Knowledge • Inspire Developers
+</p>
+<a href="{% url 'create_blog' %}"
+class="btn btn-light btn-lg">
+<i class="fa fa-pen"></i>
+Start Writing
+</a>
+</div>
+<div class="row g-3">
+<div class="col-md-4">
+<div class="stat-card">
+<i class="fa-solid fa-newspaper"></i>
+<h2>
+{{ total_blogs }}
+</h2>
+<p>
+Total Blogs
+</p>
+</div>
+</div>
+<div class="col-md-4">
+<div class="stat-card">
+<i class="fa-solid fa-users"></i>
+<h2>
+{{ total_users }}
+</h2>
+<p>
+Users
+</p>
+</div>
+</div>
+<div class="col-md-4">
+<div class="stat-card">
+<i class="fa-solid fa-fire"></i>
+<h2>
+{{ latest_blogs|length }}
+</h2>
+<p>
+Latest Posts
+</p>
+</div>
+</div>
+</div>
+<div class="row mt-5">
+    <div class="col-md-12">
+        <div class="card bg-dark border-0 shadow-lg rounded-4 p-4">
+            <h3 class="text-info mb-4">
+                <i class="fa-solid fa-bolt"></i>
+                Quick Actions
+            </h3>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <a href="{% url 'create_blog' %}" class="text-decoration-none">
+                        <div class="p-4 rounded-4 text-center action-card create-card">
+                            <i class="fa-solid fa-pen fa-2x mb-3"></i>
+                            <h5>Create Blog</h5>
+                        </div>
+
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <a href="{% url 'blog_list' %}" class="text-decoration-none">
+<div class="p-4 rounded-4 text-center action-card blog-card">
+                            <i class="fa-solid fa-book fa-2x mb-3"></i>
+                            <h5>All Blogs</h5>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <a href="{% url 'blog_list' %}" class="text-decoration-none">
+<div class="p-4 rounded-4 text-center action-card search-card">
+                            <i class="fa-solid fa-magnifying-glass fa-2x mb-3"></i>
+                            <h5>Search Blog</h5>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <a href="{% url 'logout' %}" class="text-decoration-none">
+<div class="p-4 rounded-4 text-center action-card logout-card">
+                            <i class="fa-solid fa-right-from-bracket fa-2x mb-3"></i>
+                            <h5>Logout</h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card bg-dark border-0 shadow-lg rounded-4 p-4 mt-5">
+<h3 class="text-info mb-4">
+<i class="fa-solid fa-fire"></i>
+Latest Blogs
+</h3>
+{% for blog in latest_blogs %}
+<div class="border-bottom border-secondary pb-3 mb-3">
+<h4 class="text-light">
+{{ blog.title }}
+</h4>
+<p class="text-secondary">
+{{ blog.content|truncatewords:20 }}
+</p>
+<span class="badge bg-primary">
+{{ blog.tags }}
+</span>
+<span class="badge bg-success">
+{{ blog.author }}
+</span>
+<a href="{% url 'blog_list' %}"
+class="btn btn-outline-info btn-sm float-end">
+Read More
+</a>
+</div>
+{% empty %}
+<div class="text-center p-5">
+<h5>No Blogs Available</h5>
+</div>
+{% endfor %}
+</div>
+<style>
+.action-card{
+transition:.4s;
+cursor:pointer;
+}
+.action-card:hover{
+transform:translateY(-10px) scale(1.04);
+box-shadow:0px 10px 25px rgba(0,0,0,.5);
+}
+.create-card{
+    background:#dbeafe;
+}
+.create-card h5,
+.create-card i{
+    color:#1e3a8a;
+}
+.blog-card{
+    background:#dcfce7;
+}
+.blog-card h5,
+.blog-card i{
+    color:#166534;
+}
+.search-card{
+    background:#fef9c3;
+}
+.search-card h5,
+.search-card i{
+    color:#a16207;
+}
+.logout-card{
+    background:#fee2e2;
+}
+.logout-card h5,
+.logout-card i{
+    color:#dc2626;
+}
+</style>
+<footer class="text-center mt-5 mb-4">
+<hr class="text-secondary">
+
+<p class="text-secondary">
+© 2026 TechBlog
+</p>
+<p>
+Made with ❤️ using
+<span class="text-info">
+Python • Django • Bootstrap
+</span>
+</p>
+</footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>    

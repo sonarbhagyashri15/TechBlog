@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+body{
+    background:#0f172a;
+    color:white;
+}
+.delete-container{
+
+    max-width:750px;
+    margin:70px auto;
+    padding:30px;
+
+}
+.delete-card{
+
+    background:#1e293b;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 15px 30px rgba(0,0,0,.4);
+
+}
+.delete-header{
+
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+    padding:40px;
+    text-align:center;
+    color:white;
+
+}
+.delete-header i{
+
+    font-size:45px;
+    margin-bottom:15px;
+
+}
+.delete-header h2{
+
+    font-size:36px;
+    font-weight:700;
+
+}
+.delete-body{
+
+    padding:45px;
+    text-align:center;
+
+}
+.delete-body p{
+
+    color:#cbd5e1;
+    font-size:20px;
+    margin-bottom:35px;
+
+}
+.blog-name{
+
+    color:#60a5fa;
+    font-weight:700;
+
+}
+.button-group{
+
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+
+}
+.btn-delete{
+    background:#dc2626;
+    color:white;
+    padding:13px 30px;
+    border-radius:10px;
+    border:none;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+.btn-delete:hover{
+    background:#b91c1c;
+    transform:translateY(-5px);
+}
+.btn-cancel{
+    background:#334155;
+    color:white;
+    padding:13px 30px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:600;
+    transition:.3s;
+}
+.btn-cancel:hover{
+    background:#475569;
+    color:white;
+    transform:translateY(-5px);
+}
+@media(max-width:768px){
+.delete-container{
+    padding:20px;
+}
+.delete-body{
+    padding:30px;
+}
+.btn-delete,
+.btn-cancel{
+    width:100%;
+    text-align:center;
+}
+}
+</style>
+<div class="delete-container">
+<div class="delete-card">
+<div class="delete-header">
+<i class="fa-solid fa-trash"></i>
+<h2>Delete Blog</h2>
+</div>
+<div class="delete-body">
+<p>Are you sure you want to delete this blog?
+<br>
+<span class="blog-name">
+{{ blog.title }}
+</span>?
+</p>
+<form method="POST">
+{% csrf_token %}
+<div class="button-group">
+<button type="submit" class="btn-delete">
+<i class="fa-solid fa-trash"></i>
+Yes Delete
+</button>
+<a href="{% url 'blog_list' %}" class="btn-cancel">
+<i class="fa-solid fa-arrow-left"></i>
+Cancel
+</a>
+</div>
+</form>
+</div>
+</div>
+</div>
+{% endblock %}

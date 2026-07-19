@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+body{
+    background:#b8d4ee;
+}
+.edit-container{
+    max-width:900px;
+    margin:50px auto;
+    padding:30px;
+}
+.edit-card{
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+.edit-header{
+    background:linear-gradient(135deg,#3b82f6,#60a5fa);
+    padding:35px;
+    color:white;
+    text-align:center;
+}
+.edit-title{
+    font-size:36px;
+    font-weight:700;
+}
+.edit-body{
+    padding:40px;
+}
+form p{
+    margin-bottom:20px;
+}
+label{
+    font-weight:600;
+    color:#2563eb;
+    display:block;
+    margin-bottom:8px;
+}
+input,
+textarea,
+select{
+    width:100%;
+    padding:12px 15px;
+    border-radius:10px;
+    border:1px solid #cbd5e1;
+    outline:none;
+    font-size:15px;
+    background:#f8fafc;
+}
+input:focus,
+textarea:focus,
+select:focus{    border-color:#2563eb;
+    background:white;
+}
+textarea{
+    min-height:150px;
+
+}
+.button-area{   margin-top:30px;
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    flex-wrap:wrap;
+
+}
+.btn-update,
+.btn-back{
+    padding:12px 25px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:600;
+    border:none;
+    cursor:pointer;
+    transition:.3s;
+}
+.btn-update{
+    background:#2563eb;
+    color:white;
+}
+.btn-update:hover{
+    background:#1d4ed8;
+}
+.btn-back{
+    background:#64748b;
+    color:white;}
+.btn-back:hover{
+    background:#475569;
+    color:white;
+}
+.edit-container{
+    max-width:1600px;
+    width:95%;
+    margin:50px auto;
+    padding:30px;
+}
+.edit-card{
+    background:white;
+    width:100%;
+    min-height:650px;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 12px 30px rgba(0,0,0,0.18);
+}
+@media(max-width:768px){
+.edit-header{
+    background:linear-gradient(135deg,#3b82f6,#60a5fa);
+    padding:45px;
+    color:white;
+    text-align:center;
+}
+.edit-title{
+    font-size:42px;
+    font-weight:700;
+}
+.edit-body{
+
+    padding:20px;
+
+}
+.btn-update,
+.btn-back{
+    width:100%;
+    text-align:center;
+}
+
+}
+</style>
+<div class="edit-container">
+<div class="edit-card">
+<div class="edit-header">
+<h1 class="edit-title">
+<i class="fa-solid fa-pen-to-square"></i>
+Edit Blog
+</h1>
+</div>
+<div class="edit-body">
+<form method="POST">
+{% csrf_token %}
+{{ form.as_p }}
+
+<div class="button-area">
+<button type="submit" class="btn-update">
+<i class="fa-solid fa-check"></i>
+Update Blog
+</button>
+<a href="{% url 'blog_list' %}" class="btn-back">
+<i class="fa-solid fa-arrow-left"></i>
+Back to Blogs
+</a>
+</div>
+</form>
+</div>
+</div>
+</div>
+{% endblock %}
